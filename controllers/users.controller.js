@@ -27,7 +27,7 @@ module.exports = {
           next(err)
         }
         req.flash('success_msg', `You are now registered and can log in with the user name ${user.email}`)
-        res.redirect('/comparisons')
+        res.redirect('/auth/login')
       })
     }
   }
