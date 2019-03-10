@@ -1,0 +1,28 @@
+.svg-inline--fa.fa-edit {
+  font-size: 2rem;
+}
+
+.svg-inline--fa.fa-edit.small-edit {
+  font-size: .8rem;
+}
+
+.svg-inline--fa.fa-times {
+  font-size: 2.2rem;
+}
+
+.svg-inline--fa.fa-times.small-times {
+  font-size: 1rem;
+}
+
+.svg-inline--fa.fa-plus-circle {
+  font-size: 2.5rem;
+}
+
+.svg-inline--fa.fa-check {
+  font-size: 1.5rem;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+}

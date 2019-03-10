@@ -1,0 +1,27 @@
+{{#if comparisons}}
+<div class="row">
+  {{#each comparisons}}
+  <div class="col s12 m4">
+    <div class="card">
+      <h3 class="card-header">
+        <div class="row">
+          <div class="col">
+            <a href="/comparisons/{{id}}">{{name}}</a>
+          </div>
+          <div class="col text-right">
+            {{#considerationTotalBadge this}}{{/considerationTotalBadge}}
+          </div>
+        </div>
+      </h3>
+      <p class="card-body">{{description}}</p>
+      <div class="d-inline-flex justify-content-end p-2 text-primary align-middle">
+        <form action="/comparisons/{{id}}?_method=DELETE" method="post"><button type="submit" class="icon-button text-primary"><i class="fas fa-times mr-2"></i></button></form>
+        <a href="/comparisons/edit/{{id}}"><i class="fas fa-edit"></i></a>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+{{else}}
+<p>You have not created any comparisons yet.</p>
+{{/if}}

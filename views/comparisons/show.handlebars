@@ -1,0 +1,108 @@
+<p>{{comparison.description}}</p>
+<hr>
+<form action="/comparisons/{{comparison.id}}/considerations" method="post"><input type="hidden" name="considerationId" value="{{consideration.id}}">
+  <div class="my-5">
+    <h5 class="mb-3">New Consideration</h5>
+    <div class="form-row">
+      <div class="col-9">
+        <input type="text" name="considerationDescription" class="form-control" placeholder="Description"
+          value="{{consideration.considerationDescription}}">
+      </div>
+      <div class="col">
+        <input type="text" name="considerationWeight" class="form-control" placeholder="Weight"
+          value="{{consideration.considerationWeight}}">
+      </div>
+    </div>
+    <div class="form-group text-center my-2">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="considerationIsPositive" id="isPositiveTrue" value="true"
+          {{#checkRadio consideration.considerationIsPositive true true}}{{/checkRadio}}>
+        <label class="form-check-label" for="isPositiveTrue">
+          Pro
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="considerationIsPositive" id="isPositiveFalse" value="false"
+          {{#checkRadio consideration.considerationIsPositive false false}}{{/checkRadio}}>
+        <label class="form-check-label" for="isPositiveFalse">
+          Con
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <input type="hidden" name="name" value="{{comparison.name}}">
+    <input type="hidden" name="description" value="{{comparison.description}}">
+  </div>
+</form>
+{{#if comparison}}
+<div class="row mb-3">
+  <div class="col">
+    <h5>Pros</h5>
+    <table class="table-sm">
+      <thead>
+        <tr>
+          <th width="70%">Description</th>
+          <th width="20%">Weight</th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each comparison.considerations}}
+        {{#if considerationIsPositive}}
+        <tr>
+          <td>{{considerationDescription}}</td>
+          <td>{{considerationWeight}}</td>
+          <td>
+            <div class="d-inline-flex align-middle">
+              <a href="/comparisons/{{../comparison.id}}/considerations/{{id}}"><i class="fas fa-edit small-edit"></i></a>
+              <form action="/comparisons/{{../comparison.id}}/considerations/{{id}}?_method=DELETE" method="post">
+                <button type="submit" class="icon-button text-primary"><i
+                    class="fas fa-times small-times mr-2"></i></button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {{/if}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <h5>Cons</h5>
+    <table class="table-sm">
+      <thead>
+        <tr>
+          <th width="70%">Description</th>
+          <th width="20%">Weight</th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each comparison.considerations}}
+        {{#if considerationIsPositive}}
+        {{else}}
+        <tr>
+          <td>{{considerationDescription}}</td>
+          <td>{{considerationWeight}}</td><td>
+            <div class="d-inline-flex align-middle">
+              <a href="/comparisons/{{../comparison.id}}/considerations/{{id}}"><i class="fas fa-edit small-edit"></i></a>
+              <form action="/comparisons/{{../comparison.id}}/considerations/{{id}}?_method=DELETE" method="post">
+                <button type="submit" class="icon-button text-primary"><i class="fas fa-times small-times mr-2"></i></button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {{/if}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <h4>
+      {{#considerationTotalBadge comparison}}{{/considerationTotalBadge}}
+    </h4>
+  </div>
+</div>
+{{/if}}
