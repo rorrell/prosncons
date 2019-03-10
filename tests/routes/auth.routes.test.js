@@ -3,6 +3,7 @@ const expect = require('chai').expect
   , app = require('../../server')
   , Handlebars = require('handlebars')
   , fs = require('fs')
+  , mongoose = require('mongoose')
 
 var connection, started
 describe('The auth routes', () => {
@@ -20,6 +21,7 @@ describe('The auth routes', () => {
   after((done) => {
     connection.close()
     started = false
+    mongoose.connection.close()
     console.log('test server stopped')
     done()
   })

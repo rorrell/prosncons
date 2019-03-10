@@ -19,6 +19,7 @@ module.exports = {
     mongoose.connection.on('connected', () => {
       console.log('MongoDB Connected...');
     }); 
+    return mongoose.connection
   },
   closeConnection: function() {
     mongoose.connection.close(err => {

@@ -1,6 +1,5 @@
 const express = require('express')
   , exphbs = require('express-handlebars')
-  , session = require('express-session')
   , path = require('path')
   , bodyParser = require('body-parser')
   , methodOverride = require('method-override')
@@ -8,6 +7,9 @@ const express = require('express')
   , passport = require('passport')
   , expressHelper = require('./helpers/express.helper')
   , hbsHelper = require('./helpers/handlebars.helper')
+  , mongooseHelper = require('./helpers/mongoose.helper')
+  , keys = require('./config/keys/keys')
+  , session = require('./config/session')
 
 const app = express()
 
@@ -38,12 +40,11 @@ app.use('/webfonts', express.static(path.join(__dirname, '/node_modules/@fortawe
 // Method override middleware
 app.use(methodOverride('_method'))
 
+//Mongoose
+const connection = mongooseHelper.connectToMongoose(keys.mongoURI)
+
 // Express session middleware
-app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true
-}))
+app.use(session(connection))
 
 // Connect flash middleware
 app.use(flash());
